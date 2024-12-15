@@ -1,0 +1,34 @@
+[colors]
+# Primary colors
+[colors.primary]
+background = "0x000000"    # Black background
+foreground = "0x00FF00"    # Neon green text
+
+# Cursor
+[colors.cursor]
+text = "0x000000"          # Cursor text black
+cursor = "0x00FF00"        # Neon green cursor
+
+# Normal colors
+[colors.normal]
+black = "0x000000"
+red = "0xFF0000"
+green = "0x00FF00"
+yellow = "0xFFFF00"
+blue = "0x00FFFF"
+magenta = "0xFF00FF"
+cyan = "0x00FFFF"
+white = "0xC0C0C0"
+
+# Bright colors
+[colors.bright]
+black = "0x808080"
+red = "0xFF4500"
+green = "0x32CD32"
+yellow = "0xFFFFA0"
+blue = "0xADD8E6"
+magenta = "0xEE82EE"
+cyan = "0xAFEEEE"
+white = "0xFFFFFF"
+
+

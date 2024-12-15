@@ -1,0 +1,141 @@
+# i3 Config File (v4)
+# For more details, visit: https://i3wm.org/docs/userguide.html
+
+# Mod key setup
+set $mod Mod1
+floating_modifier $mod
+
+# Font configuration
+# font pango:"JetBrains Mono" 8
+font pango:"Hack Nerd Font" 8
+
+# Client color configurations
+client.focused          #005B73 #005B73 #FFFFFF
+client.unfocused        #3E3E3E #3E3E3E #B0B0B0
+client.urgent           #FF2D00 #FF2D00 #FF2D00
+
+# Window border settings
+for_window [class="^.*"] border pixel 0
+
+# Border toggle keybindings
+bindsym $mod+Shift+b exec --no-startup-id i3-msg '[class="^.*"] border pixel 3'
+bindsym $mod+Shift+x exec --no-startup-id i3-msg '[class="^.*"] border pixel 0'
+
+# Enable XDG autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# Touchpad settings
+exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput Tapping Enabled" 1
+
+# Screenshot command
+bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
+
+# Background wallpaper
+exec_always --no-startup-id feh --bg-scale ./.config/i3/images/nature3.jpg
+
+# Lock screen and power management
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# Network and audio applets
+exec --no-startup-id nm-applet
+
+# Run picom (uncomment to enable)
+# exec --no-startup-id picom
+
+# Application bindings
+bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+c exec flameshot gui
+bindsym $mod+q kill
+bindsym $mod+b exec --no-startup-id midori
+bindsym $mod+e exec --no-startup-id alacritty -e ranger
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+# Window focus navigation
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused windows
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+
+# Split windows
+bindsym ctrl+$mod+h split h
+bindsym ctrl+$mod+v split v
+
+# Tiling and floating options
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# Resize mode
+mode "resize" {
+    bindsym $mod+Shift+k resize grow height 10 px or 10 ppt
+    bindsym $mod+Shift+j resize shrink height 10 px or 10 ppt
+    bindsym $mod+Shift+h resize shrink width 10 px or 10 ppt
+    bindsym $mod+Shift+l resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Gaps configuration
+gaps inner 15
+gaps outer 15
+
+# Workspace definitions
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Workspace bindings
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# i3 reload and restart
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Bar configuration
+bar {
+    mode hide
+    hidden_state hide
+    modifier Mod4
+    status_command i3status
+}
+

@@ -1,0 +1,34 @@
+[ env ]
+TERM = "xterm-256color"
+
+[window]
+# padding.x = 10
+# padding. 
+opacity = 1
+blur = false
+
+decorations = "none"
+
+[font]
+# normal.family = "Hack Nerd Font"
+normal.family = "JetBrains Mono"
+size = 10
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "p"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "c"
+mods = "Alt"
+
+[general]
+import = [
+    "./themes/coolnight.toml"
+]
+
+#for video
+# size = 35.0
+
