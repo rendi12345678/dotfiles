@@ -9,9 +9,9 @@ opt.guicursor = ""
 -- Indentation
 opt.autoindent = true
 opt.smartindent = true
-opt.tabstop = 2      -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2   -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
+opt.tabstop = 2      
+opt.shiftwidth = 2   
+opt.expandtab = true 
 opt.smarttab = true
 opt.cmdheight = 0
 opt.breakindent = true
