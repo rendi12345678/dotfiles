@@ -64,13 +64,12 @@ end
 -- Function to build the simplified status line
 function StatusLine()
     local mode = vim.fn.mode() -- Get current mode (normal, insert, etc.)
-    local file_name = vim.fn.expand('%:t') -- File name
     local git_branch = GetGitBranch() -- Get Git branch, if any
     local line_number = vim.fn.line('.') -- Current line number
     local col_number = vim.fn.col('.') -- Current column number
 
     -- Build the status line string
-    local status = string.format("%s | %s | %d:%d", mode, file_name, line_number, col_number)
+    local status = string.format("%s | %d:%d", mode, line_number, col_number)
 
     -- Append Git branch if we are in a Git repository
     if git_branch ~= "" then
