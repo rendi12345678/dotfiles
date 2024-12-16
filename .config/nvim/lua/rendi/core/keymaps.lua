@@ -9,9 +9,6 @@ keymap.set("n", "<leader>as", ":LspStart<CR>", { noremap = true, silent = true }
 local opts = { noremap=true, silent=true, desc = "Go to definition" }
 keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
 
-keymap.set("n", "<leader>'w", "yiw/<C-r>\"<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>;w", "yiw?<C-r>\"<CR>", { noremap = true, silent = true })
-
 keymap.set("n", "<leader>dcc", [[:%s/\/\/.*//g<CR>]], { noremap = true, silent = true, desc = "Removes all comments in the file." })
 keymap.set("n", "<leader>dcl", [[:%s/\n\{3,}/\r\r/e<CR>]], { noremap = true, silent = true, desc = "Collapses multiple consecutive empty lines into a single line." })
 keymap.set("n", "<leader>sc", [[:/\/\/.*<CR>]], { noremap = true, silent = true, desc = "Search all comments." })
