@@ -5,6 +5,8 @@ fi
 
 # Environment Variables
 export SUDO_EDITOR="nvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export MAKEFLAGS="-j$(nproc)"
 export PATH="$HOME/.config/composer/vendor/bin:$HOME/.cargo/bin:/opt/nvim-linux64/bin:/opt/nvim/:/home/rendi/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
@@ -59,6 +61,7 @@ alias e="exit"
 alias run-parrot-server="qemu-system-x86_64 -m 3G -cdrom ~/Downloads/Parrot-home-6.2_amd64.iso -boot d -hda ~/Downloads/parrot-os.qcow2 -enable-kvm -net nic -net user"
 alias run-parrot-client="vncviewer localhost:5900"
 alias n="nvim"
+alias r="ranger"
 alias sn="sudoedit"
 alias c="clear"
 alias t="tmux"
