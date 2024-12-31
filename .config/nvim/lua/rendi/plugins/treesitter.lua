@@ -40,7 +40,7 @@ return {
       },
       -- ensure these language parsers are installed
       ensure_installed = {
-        "json", "javascript", "typescript", "tsx", "asm", "yaml", "html", "css",
+        "json", "javascript", "java", "typescript", "tsx", "asm", "yaml", "html", "css",
         "prisma", "python", "markdown", "markdown_inline", "graphql", "php", "bash",
         "lua", "vim", "dockerfile", "gitignore", "query", "vimdoc", "c", "rust",
       },

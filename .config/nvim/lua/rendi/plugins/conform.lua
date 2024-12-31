@@ -8,6 +8,7 @@ return {
       formatters_by_ft = {
         c = { "clang-format" },
         cpp = { "clang-format" },
+        java = { "google-java-format" },  
         javascript = { "prettier" },
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
@@ -19,12 +20,12 @@ return {
         html = { "prettier" },
         json = { "prettier" },
         yaml = { "prettier" },
-        blade = { "blade-formatter" },  -- Make sure you have blade-formatter installed
+        blade = { "blade-formatter" },
         markdown = { "prettier" },
         graphql = { "prettier" },
         liquid = { "prettier" },
-        lua = { "stylua" },  -- Use stylua for Lua formatting
-        python = { "black" },  -- Use black for Python formatting
+        lua = { "stylua" },
+        python = { "black" },
       },
       format_on_save = {
         lsp_fallback = true,

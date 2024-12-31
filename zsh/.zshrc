@@ -4,6 +4,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Environment Variables
+export JAVA_HOME=/usr/bin/java  
+export PATH=$JAVA_HOME/bin:$PATH
 export SUDO_EDITOR="nvim"
 export EDITOR="nvim"
 export VISUAL="nvim"
