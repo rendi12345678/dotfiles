@@ -1,25 +1,16 @@
 return {
-  "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
-  lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+  "neovim/nvim-lspconfig", -- REQUIRED: Native Neovim LSP integration
+  lazy = false, -- REQUIRED: Start plugin at startup
   dependencies = {
-    -- main one
+    -- COQ
     { "ms-jpq/coq_nvim", branch = "coq" },
-
-    -- 9000+ Snippets
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
-
-    -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
-    -- Need to **configure separately**
     { "ms-jpq/coq.thirdparty", branch = "3p" },
-    -- - shell repl
-    -- - nvim lua api
-    -- - scientific calculator
-    -- - comment banner
-    -- - etc
+    { "mfussenegger/nvim-jdtls" },
   },
   init = function()
     vim.g.coq_settings = {
-      auto_start = true, -- if you want to start COQ at startup
+      auto_start = true, -- Auto-start COQ
       keymap = {
         recommended = false,
         bigger_preview = "",
@@ -34,62 +25,35 @@ return {
   end,
   config = function()
     -- Keybindings
-    vim.api.nvim_set_keymap("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "\<Esc>"]], { expr = true, silent = true })
-    vim.api.nvim_set_keymap("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "\<C-c>"]], { expr = true, silent = true })
-    -- vim.api.nvim_set_keymap('i', '<BS>', [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "<Esc>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "<C-c>"]], { expr = true, silent = true })
     vim.api.nvim_set_keymap(
       "i",
       "<Tab>",
-      [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
+      [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "<Tab>"]],
       { expr = true, silent = true }
     )
-    vim.api.nvim_set_keymap("i", "<C-j>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, silent = true })
-    vim.api.nvim_set_keymap("i", "<C-k>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<C-j>", [[pumvisible() ? "\<C-n>" : "<Tab>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<C-k>", [[pumvisible() ? "\<C-p>" : "<BS>"]], { expr = true, silent = true })
 
-    -- Lsp config
+    -- LSP and COQ integration
     local lsp = require("lspconfig")
     local coq = require("coq")
 
-    lsp.jdtls.setup(coq.lsp_ensure_capabilities({
-      cmd = {
-        "java",
-        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-        "-Dosgi.bundles.defaultStartLevel=4",
-        "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        "-Dlog.level=ALL",
-        "-Xmx1G",
-        "-data",
-        vim.fn.expand("~/.cache/jdtls/workspace"),
-      },
+    local jdtls_config = {
+      cmd = { "java" },
       root_dir = function(fname)
         return require("lspconfig").util.root_pattern("pom.xml", "build.gradle", ".git")(fname) or vim.fn.getcwd()
       end,
-      settings = {
-        java = {
-          signatureHelp = { enabled = true },
-          contentProvider = { preferred = "fernflower" },
-        },
-      },
-    }))
+    }
 
+    lsp.jdtls.setup(coq.lsp_ensure_capabilities(jdtls_config))
     lsp.ts_ls.setup(coq.lsp_ensure_capabilities({}))
     lsp.asm_lsp.setup(coq.lsp_ensure_capabilities({}))
     lsp.tailwindcss.setup(coq.lsp_ensure_capabilities({}))
     lsp.intelephense.setup(coq.lsp_ensure_capabilities({}))
     lsp.html.setup(coq.lsp_ensure_capabilities({}))
-    lsp.phpactor.setup(coq.lsp_ensure_capabilities({}))
-    lsp.emmet_ls.setup(coq.lsp_ensure_capabilities({}))
     lsp.jsonls.setup(coq.lsp_ensure_capabilities({}))
-    -- lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities{
-    --   settings = {
-    --     ["rust-analyzer"] = {
-    --       cargo = {
-    --         allFeatures = true,
-    --       },
-    --       checkOnSave = {
-    --         command = "clippy",
-    --       },
-    --     },
-    --   },})
+    lsp.emmet_ls.setup(coq.lsp_ensure_capabilities({}))
   end,
 }
