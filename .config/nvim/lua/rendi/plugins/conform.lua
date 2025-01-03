@@ -7,6 +7,7 @@ return {
     conform.setup({
       formatters_by_ft = {
         c = { "clang-format" },
+        asm = { "asmfmt" },
         cpp = { "clang-format" },
         java = { "google-java-format" },
         javascript = { "prettier" },

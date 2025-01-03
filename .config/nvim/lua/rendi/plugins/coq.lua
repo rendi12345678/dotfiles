@@ -26,6 +26,30 @@ return {
     local lsp = require("lspconfig")
     local coq = require("coq")
 
+    local function hide_diagnostics()
+      vim.diagnostic.config({
+        virtual_text = false,
+        signs = false,
+        underline = false,
+      })
+    end
+    local function show_diagnostics()
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+      })
+    end
+
+    vim.keymap.set("n", "<leader>dh", hide_diagnostics)
+    vim.keymap.set("n", "<leader>ds", show_diagnostics)
+
+    -- Automatically hide diagnostics for asm, s, or S file types
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   pattern = { "asm", "s", "S" },
+    --   callback = hide_diagnostics,
+    -- })
+
     -- Utility function to simplify setup
     local function setup_lsp(server, opts)
       lsp[server].setup(coq.lsp_ensure_capabilities(opts or {}))
@@ -33,16 +57,10 @@ return {
 
     -- Configure asm_lsp
     setup_lsp("asm_lsp", {
-      cmd = { "asm-lsp" },
+      cmd = { "/home/rendi/.cargo/bin/asm-lsp" },
       filetypes = { "asm", "s", "S" },
-      root_dir = function(fname)
-        return lsp.util.root_pattern(".git")(fname) or vim.fn.getcwd()
-      end,
-      settings = {
-        asm = {
-          enable = true,
-        },
-      },
+      root_dir = lsp.util.root_pattern(".git", "Makefile") or vim.fn.getcwd(),
+      autostart = true,
     })
 
     -- Configure jdtls (Java)
@@ -62,7 +80,7 @@ return {
         "--add-opens",
         "java.base/java.lang=ALL-UNNAMED",
         "-jar",
-        vim.fn.expand("~/Downloads/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"),
+        vim.fn.expand("~/.config/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"),
         "-configuration",
         vim.fn.expand("~/.config/config_linux"),
         "-data",

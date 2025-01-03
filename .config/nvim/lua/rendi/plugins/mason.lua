@@ -48,6 +48,7 @@ return {
         "isort", -- python formatter
         "black", -- python formatter
         "pylint",
+        "asmfmt",
         "eslint_d",
         "google-java-format",
         "clang-format",
