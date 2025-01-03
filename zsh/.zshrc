@@ -73,8 +73,9 @@ alias tn="tmux new -t"
 alias tl="tmux ls"
 alias nq="n ~/.config/qutebrowser/config.py"
 alias nn="n ~/.config/nvim"
-alias nt="n ~/.tmux.conf"
-alias nz="n ~/.zshrc"
+alias nt="n ~/tmux/.tmux.conf"
+alias nz="n ~/zsh/.zshrc"
+alias nb="n ~/bash/.bashrc"
 alias na="n ~/.config/alacritty/alacritty.toml"
 alias ni="n ~/.config/i3/config"
 alias np="n ~/.config/picom/picom.conf"
@@ -116,8 +117,9 @@ alias dcw="docker compose watch"
 alias cw='cargo watch -q -c -w src/ -x "run -q"'
 
 # tmux Reload
-alias sot="tmux source ~/.tmux.conf"
-alias soz="source ~/.zshrc"
+alias sot="tmux source ~/tmux/.tmux.conf"
+alias soz="source ~/zsh/.zshrc"
+alias sob="source ~/bash/.bashrc"
 
 # Utilities
 alias tree="tree -L 3 -a -I '.git' --charset X"
