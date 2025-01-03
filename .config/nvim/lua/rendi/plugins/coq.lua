@@ -26,6 +26,12 @@ return {
     local lsp = require("lspconfig")
     local coq = require("coq")
 
+    -- Utility function to simplify setup
+    local function setup_lsp(server, opts)
+      lsp[server].setup(coq.lsp_ensure_capabilities(opts or {}))
+    end
+
+    -- Keymap for diagnostics
     local function hide_diagnostics()
       vim.diagnostic.config({
         virtual_text = false,
@@ -44,17 +50,6 @@ return {
     vim.keymap.set("n", "<leader>dh", hide_diagnostics)
     vim.keymap.set("n", "<leader>ds", show_diagnostics)
 
-    -- Automatically hide diagnostics for asm, s, or S file types
-    -- vim.api.nvim_create_autocmd("FileType", {
-    --   pattern = { "asm", "s", "S" },
-    --   callback = hide_diagnostics,
-    -- })
-
-    -- Utility function to simplify setup
-    local function setup_lsp(server, opts)
-      lsp[server].setup(coq.lsp_ensure_capabilities(opts or {}))
-    end
-
     -- Configure asm_lsp
     setup_lsp("asm_lsp", {
       cmd = { "/home/rendi/.cargo/bin/asm-lsp" },
@@ -63,7 +58,7 @@ return {
       autostart = true,
     })
 
-    -- Configure jdtls (Java)
+    -- Configure JDTLS (Java)
     local workspace_dir = vim.fn.expand("~/workspace-root/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
     setup_lsp("jdtls", {
       cmd = {
@@ -71,18 +66,17 @@ return {
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
         "-Dosgi.bundles.defaultStartLevel=4",
         "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        "-Dlog.protocol=true",
         "-Dlog.level=ALL",
-        "-Xmx1g",
+        "-Xmx1G",
         "--add-modules=ALL-SYSTEM",
         "--add-opens",
         "java.base/java.util=ALL-UNNAMED",
         "--add-opens",
         "java.base/java.lang=ALL-UNNAMED",
         "-jar",
-        vim.fn.expand("~/.config/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"),
+        vim.fn.expand("~/.config/jdtls-latest/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"),
         "-configuration",
-        vim.fn.expand("~/.config/config_linux"),
+        vim.fn.expand("~/.config/jdtls-latest/config_linux"),
         "-data",
         workspace_dir,
       },
@@ -135,5 +129,18 @@ return {
       filetypes = { "html", "css", "javascriptreact", "typescriptreact" },
       root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
     })
+
+    -- Keybindings
+    vim.api.nvim_set_keymap("i", "<Esc>", [[pumvisible() ? "\<C-e><Esc>" : "\<Esc>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<C-c>", [[pumvisible() ? "\<C-e><C-c>" : "\<C-c>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<BS>", [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap(
+      "i",
+      "<Tab>",
+      [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]],
+      { expr = true, silent = true }
+    )
+    vim.api.nvim_set_keymap("i", "<C-n>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true, silent = true })
+    vim.api.nvim_set_keymap("i", "<C-p>", [[pumvisible() ? "\<C-p>" : "\<BS>"]], { expr = true, silent = true })
   end,
 }
