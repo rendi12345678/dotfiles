@@ -83,6 +83,11 @@ return {
       root_dir = function(fname)
         return lsp.util.root_pattern(".git", "pom.xml", "build.gradle")(fname) or vim.fn.getcwd()
       end,
+      handlers = {
+        -- By assigning an empty function, you can remove the notifications
+        -- printed to the cmd
+        ["$/progress"] = function(_, result, ctx) end,
+      },
     })
 
     -- Configure TypeScript LSP

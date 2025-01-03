@@ -1,21 +1,19 @@
-# Powerlevel10k Instant Prompt (keep this near the top for better performance)
+# Powerlevel10k Instant Prompt (should stay close to the top)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Environment Variables
 export JAVA_HOME=/usr/lib/jvm/java-23-openjdk
-export PATH="$JAVA_HOME/bin:$PATH"
+export PATH=$JAVA_HOME/bin:$PATH
 export SUDO_EDITOR="nvim"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export MAKEFLAGS="-j$(nproc)"
-export PATH="$HOME/.config/composer/vendor/bin:$HOME/.cargo/bin:/opt/nvim-linux64/bin:/opt/nvim:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$HOME/.cargo/bin:/opt/nvim-linux64/bin:/opt/nvim/:/home/rendi/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 export ZAP_PORT=8090
 export ZAP_PATH="/usr/share/zaproxy/zap.sh"
-export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # Perl Local Libraries
 export PATH="/home/rendi/perl5/bin${PATH:+:${PATH}}"
@@ -29,27 +27,24 @@ export PERL_MM_OPT="INSTALL_BASE=/home/rendi/perl5"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 eval "$(zoxide init zsh)"
 
-# Load Plugins and Themes
+# Load fzf
 source ~/dotfiles/zsh/plugins/fzf/shell/key-bindings.zsh
+
+# Load Powerlevel10k Theme
 source ~/dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# Load zsh-autosuggestions
 source ~/dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Load zsh-syntax-highlighting
 source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-autoload -U compinit && compinit
+
+# Load fzf-tab
 source ~/dotfiles/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
-# ZSH History
-HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt share_history hist_expire_dups_first hist_ignore_dups hist_verify
-
-# ZSH Editor Features
-bindkey -v
-bindkey -M vicmd 'p' paste
-bindkey -M vicmd 'y' copy
-zle -N paste
-zle -N copy
+# Load zoxide
+# eval "$(~/dotfiles/zsh/plugins/zoxide/install.sh)"
 
 # Aliases
 alias sudoedit='function _sudoedit(){ sudo -e "$1"; };_sudoedit'
@@ -65,6 +60,8 @@ alias disconnect-hdmi-1="xrandr --output HDMI-1 --off"
 
 # Application Aliases
 alias e="exit"
+alias run-parrot-server="qemu-system-x86_64 -m 3G -cdrom ~/Downloads/Parrot-home-6.2_amd64.iso -boot d -hda ~/Downloads/parrot-os.qcow2 -enable-kvm -net nic -net user"
+alias run-parrot-client="vncviewer localhost:5900"
 alias n="nvim"
 alias r="ranger"
 alias sn="sudoedit"
@@ -74,6 +71,14 @@ alias trn="tmux rename"
 alias ta="tmux attach -t"
 alias tn="tmux new -t"
 alias tl="tmux ls"
+alias nq="n ~/.config/qutebrowser/config.py"
+alias nn="n ~/.config/nvim"
+alias nt="n ~/.tmux.conf"
+alias nz="n ~/.zshrc"
+alias nb="n ~/.bashrc"
+alias na="n ~/.config/alacritty/alacritty.toml"
+alias ni="n ~/.config/i3/config"
+alias np="n ~/.config/picom/picom.conf"
 
 # Directory Aliases
 alias cd="z"
@@ -111,6 +116,11 @@ alias dcw="docker compose watch"
 # Cargo Aliases
 alias cw='cargo watch -q -c -w src/ -x "run -q"'
 
+# tmux Reload
+alias sot="tmux source ~/.tmux.conf"
+alias soz="source ~/.zshrc"
+alias sob="source ~/.bashrc"
+
 # Utilities
 alias tree="tree -L 3 -a -I '.git' --charset X"
 alias dtree="tree -L 3 -a -d -I '.git' --charset X"
@@ -125,7 +135,6 @@ alias shutdown-zap="zap-cli shutdown"
 # Hacking 
 alias aslr-off="echo 0 | sudo tee /proc/sys/kernel/randomize_va_space"
 
-# Edit Command Function
 edit_zsh_command() {
   local temp_file=$(mktemp /tmp/zsh_command.XXXXXX)
   [[ -z "$temp_file" ]] && { echo "Failed to create a temporary file."; return; }
@@ -143,14 +152,48 @@ edit_zsh_command() {
   fi
 }
 
-# Package Manager Auto-Complete
 package_manager_auto_complete() {
+  # Get the list of available packages
   local packages
   packages=$(pacman -Ss | awk '{print $1}' | fzf --height=40% --border --preview="pacman -Si {1}" --preview-window=right:70%:wrap)
+
+  # Return the selected package
   [[ -n "$packages" ]] && LBUFFER="$LBUFFER$packages"
 }
 
-# Bind Keys
+# Bind Tab to trigger the fzf interface for pacman
 zle -N package_manager_auto_complete
 bindkey '^I' package_manager_auto_complete
+
 bindkey -s '^e' "edit_zsh_command^M"
+
+# ZSH History
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history hist_expire_dups_first hist_ignore_dups hist_verify
+
+# ZSH Editor Features
+bindkey -v
+bindkey -M vicmd 'p' paste
+bindkey -M vicmd 'y' copy
+zle -N paste
+zle -N copy
+
+# Enable fzf
+source <(fzf --zsh)
+
+# Load fzf-tab
+autoload -U compinit; compinit
+source ~/dotfiles/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+# Activate Powerlevel10k
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source ~/dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# Syntax Highlighting and Autosuggestions
+source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
