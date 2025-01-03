@@ -6,7 +6,6 @@ return {
     { "ms-jpq/coq_nvim", branch = "coq" },
     { "ms-jpq/coq.artifacts", branch = "artifacts" },
     { "ms-jpq/coq.thirdparty", branch = "3p" },
-    { "mfussenegger/nvim-jdtls" },
   },
   init = function()
     vim.g.coq_settings = {
@@ -59,36 +58,32 @@ return {
     })
 
     -- Configure JDTLS (Java)
-    local workspace_dir = vim.fn.expand("~/workspace-root/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
-    setup_lsp("jdtls", {
-      cmd = {
-        "java",
-        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-        "-Dosgi.bundles.defaultStartLevel=4",
-        "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        "-Dlog.level=ALL",
-        "-Xmx1G",
-        "--add-modules=ALL-SYSTEM",
-        "--add-opens",
-        "java.base/java.util=ALL-UNNAMED",
-        "--add-opens",
-        "java.base/java.lang=ALL-UNNAMED",
-        "-jar",
-        vim.fn.expand("~/.config/jdtls-latest/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"),
-        "-configuration",
-        vim.fn.expand("~/.config/jdtls-latest/config_linux"),
-        "-data",
-        workspace_dir,
-      },
-      root_dir = function(fname)
-        return lsp.util.root_pattern(".git", "pom.xml", "build.gradle")(fname) or vim.fn.getcwd()
-      end,
-      handlers = {
-        -- By assigning an empty function, you can remove the notifications
-        -- printed to the cmd
-        ["$/progress"] = function(_, result, ctx) end,
-      },
-    })
+    -- local workspace_dir = vim.fn.expand("~/workspace-root/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
+    -- setup_lsp("jdtls", {
+    --   cmd = {
+    --     "java",
+    --     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    --     "-Dosgi.bundles.defaultStartLevel=4",
+    --     "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    --     "-Dlog.protocol=true",
+    --     "-Dlog.level=ALL",
+    --     "-Xmx1G",
+    --     "--add-modules=ALL-SYSTEM",
+    --     "--add-opens",
+    --     "java.base/java.util=ALL-UNNAMED",
+    --     "--add-opens",
+    --     "java.base/java.lang=ALL-UNNAMED",
+    --     "-jar",
+    --     vim.fn.expand("~/.config/jdtls-latest/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"),
+    --     "-configuration",
+    --     vim.fn.expand("~/.config/jdtls-latest/config_linux"),
+    --     "-data",
+    --     workspace_dir,
+    --   },
+    --   root_dir = function(fname)
+    --     return lsp.util.root_pattern(".git", "pom.xml", "build.gradle")(fname) or vim.fn.getcwd()
+    --   end,
+    -- })
 
     -- Configure TypeScript LSP
     setup_lsp("ts_ls", {
