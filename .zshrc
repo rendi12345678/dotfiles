@@ -4,6 +4,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Environment Variables
+export PYTHONPATH=/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/site-packages
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 export SUDO_EDITOR="nvim"
@@ -47,8 +48,10 @@ source ~/dotfiles/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 # eval "$(~/dotfiles/zsh/plugins/zoxide/install.sh)"
 
 # Aliases
+alias printd='printf "%d\n"'
 alias sudoedit='function _sudoedit(){ sudo -e "$1"; };_sudoedit'
 alias ls="eza --icons=always"
+alias b_status="upower -d | grep percentage | head -n 1"
 alias cu="cd /run/media/rendi"
 alias mount-usb="udisksctl mount -b"
 alias unmount-usb="udisksctl unmount -b"

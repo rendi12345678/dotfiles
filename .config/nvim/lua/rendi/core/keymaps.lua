@@ -13,9 +13,30 @@ keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 
 keymap.set(
   "n",
-  "<leader>dcc",
-  [[:%s/\/\/.*\|;.*//g<CR>]],
-  { noremap = true, silent = true, desc = "Removes all comments in the file, including assembly comments." }
+  "<leader>ddc",
+  [[:%s/--.*//g<CR>]],
+  { noremap = true, silent = true, desc = "Removes all comments that start with -- in the file." }
+)
+
+keymap.set(
+  "n",
+  "<leader>dac",
+  [[:%s/;.*//g<CR>]],
+  { noremap = true, silent = true, desc = "Removes all assembly comments in the file." }
+)
+
+keymap.set(
+  "n",
+  "<leader>drc",
+  [[:%s/\/\/.*//g<CR>]],
+  { noremap = true, silent = true, desc = "Removes all regular comments in the file." }
+)
+
+keymap.set(
+  "n",
+  "<leader>dhc",
+  [[:%s/#.*//g<CR>]],
+  { noremap = true, silent = true, desc = "Removes all comments that start with # in the file." }
 )
 keymap.set(
   "n",
