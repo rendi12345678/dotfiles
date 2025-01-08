@@ -144,19 +144,46 @@ alias shutdown-zap="zap-cli shutdown"
 # Hacking 
 alias aslr-off="echo 0 | sudo tee /proc/sys/kernel/randomize_va_space"
 
-edit_zsh_command() {
+edit_and_execute_command() {
+  # Create a temporary file for editing
   local temp_file=$(mktemp /tmp/zsh_command.XXXXXX)
-  [[ -z "$temp_file" ]] && { echo "Failed to create a temporary file."; return; }
+  [[ -z "$temp_file" ]] && { echo -e "\033[38;5;196m[ERROR]\033[0m Failed to create a temporary file."; return; }
 
+  # Open the file in Neovim
   nvim "$temp_file"
+
+  # Check if Neovim exited successfully
   if [[ $? -eq 0 ]]; then
+    # Read the last command from the temporary file
     local last_command=$(cat "$temp_file")
-    echo -n "Last command executed: $last_command"
-    local response=$(eval "$last_command")
-    echo -e "\nResponse:\n$response"
+    
+    # Display the last command executed with a cool and bold header
+    echo -e "\033[38;5;226m\033[1m[COMMAND]\033[0m"
+    echo -e "\033[38;5;33m\033[4m$last_command\033[0m"
+
+    # Copy the command to the clipboard using xclip
+    echo -n "$last_command" | xclip -selection clipboard
+
+    # Add the command to history using fc or appending manually
+    echo "$last_command" >> ~/.zsh_history
+    fc -A  # Append the history list
+
+    # Execute the command and capture the output
+    local response=$(eval "$last_command" 2>&1)
+    
+    # Check if the command was successful or failed and display output in color
+    if [[ $? -eq 0 ]]; then
+      echo -e "\n\033[38;5;44m[OUTPUT]\033[0m"
+      echo -e "\033[38;5;44m$response\033[0m"
+    else
+      echo -e "\n\033[38;5;196m[ERROR]\033[0m Command failed with output:"
+      echo -e "\033[38;5;196m$response\033[0m"
+    fi
+    
+    # Remove the temporary file
     rm "$temp_file"
   else
-    echo "Failed to edit the file in Neovim."
+    echo -e "\033[38;5;196m[ERROR]\033[0m Failed to edit the file in Neovim."
     rm "$temp_file"
   fi
 }
@@ -174,7 +201,7 @@ package_manager_auto_complete() {
 zle -N package_manager_auto_complete
 bindkey '^I' package_manager_auto_complete
 
-bindkey -s '^e' "edit_zsh_command^M"
+bindkey -s '^e' "edit_and_execute_command^M"
 
 # ZSH History
 HISTFILE=$HOME/.zhistory
