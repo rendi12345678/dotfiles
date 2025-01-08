@@ -173,11 +173,15 @@ edit_and_execute_command() {
     
     # Check if the command was successful or failed and display output in color
     if [[ $? -eq 0 ]]; then
-      echo -e "\n\033[38;5;44m[OUTPUT]\033[0m"
-      echo -e "\033[38;5;44m$response\033[0m"
+      if [[ -n "$response" ]]; then  # Only print output if there is something to display
+        echo -e "\n\033[38;5;44m[OUTPUT]\033[0m"
+        echo -e "\033[38;5;44m$response\033[0m"
+      fi
     else
-      echo -e "\n\033[38;5;196m[ERROR]\033[0m Command failed with output:"
-      echo -e "\033[38;5;196m$response\033[0m"
+      if [[ -n "$response" ]]; then  # Only print error if there is something to display
+        echo -e "\n\033[38;5;196m[ERROR]\033[0m Command failed with output:"
+        echo -e "\033[38;5;196m$response\033[0m"
+      fi
     fi
     
     # Remove the temporary file
