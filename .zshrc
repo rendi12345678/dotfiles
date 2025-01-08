@@ -95,6 +95,12 @@ alias nrd="npm run dev"
 alias nrs="npm run start"
 alias nrb="npm run build"
 
+# pnpm Scripts
+alias pnrw="pnpm run watch"
+alias pnrd="pnpm run dev"
+alias pnrs="pnpm run start"
+alias pnrb="pnpm run build"
+
 # Git Aliases
 alias ga="git add"
 alias gs="git status"
