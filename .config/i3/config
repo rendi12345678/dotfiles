@@ -46,7 +46,7 @@ exec --no-startup-id nm-applet
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+c exec flameshot gui
 bindsym $mod+q kill
-bindsym $mod+b exec --no-startup-id midori
+bindsym $mod+b exec --no-startup-id librewolf
 bindsym $mod+e exec --no-startup-id alacritty -e ranger
 bindsym $mod+d exec --no-startup-id dmenu_run
 
