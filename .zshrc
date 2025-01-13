@@ -16,6 +16,8 @@ export PATH="$HOME/.config/composer/vendor/bin:$HOME/.cargo/bin:/opt/nvim-linux6
 export NVM_DIR="$HOME/.nvm"
 export ZAP_PORT=8090
 export ZAP_PATH="/usr/share/zaproxy/zap.sh"
+export ANDROID_HOME=/opt/android-sdk
+export NDK_HOME=/opt/android-ndk
 
 # Perl Local Libraries
 export PATH="/home/rendi/perl5/bin${PATH:+:${PATH}}"
