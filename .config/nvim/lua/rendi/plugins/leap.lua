@@ -1,7 +1,7 @@
 return {
   "ggandor/leap.nvim",
   config = function()
-    local leap = require('leap')
+    local leap = require("leap")
 
     leap.set_default_keymaps()
 

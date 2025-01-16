@@ -106,6 +106,11 @@ return {
       end,
     })
 
+    -- Configur clangd
+    setup_lsp("clangd", {
+      root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
+    })
+
     -- Configure HTML
     setup_lsp("html", {
       root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
