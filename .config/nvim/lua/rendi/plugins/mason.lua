@@ -49,7 +49,6 @@ return {
         "black", -- python formatter
         "pylint",
         "asmfmt",
-        "eslint_d",
         "google-java-format",
         "clang-format",
       },

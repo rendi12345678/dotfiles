@@ -2,6 +2,11 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt
 
+opt.wildignore:append({
+  "**/node_modules/**",
+  "**/.*",
+})
+
 opt.relativenumber = true
 opt.number = true
 opt.guicursor = ""
@@ -51,37 +56,3 @@ opt.splitbelow = true -- split horizontal window to the bottom
 opt.swapfile = false
 opt.backup = false
 opt.writebackup = false
-
--- Function to get the Git branch, if available
--- function GetGitBranch()
---     local git_branch = vim.fn.systemlist('git rev-parse --abbrev-ref HEAD 2>/dev/null')[1]
---     if vim.fn.empty(git_branch) == 1 then
---         return ""
---     end
---     return git_branch
--- end
---
--- -- Function to build the simplified status line
--- function StatusLine()
---     local mode = vim.fn.mode() -- Get current mode (normal, insert, etc.)
---     local git_branch = GetGitBranch() -- Get Git branch, if any
---     local line_number = vim.fn.line('.') -- Current line number
---     local col_number = vim.fn.col('.') -- Current column number
---
---     -- Build the status line string
---     local status = string.format("%s | %d:%d", mode, line_number, col_number)
---
---     -- Append Git branch if we are in a Git repository
---     if git_branch ~= "" then
---         status = status .. " | " .. git_branch
---     end
---
---     return status
--- end
---
--- -- Set custom statusline function
--- vim.o.statusline = "%!v:lua.StatusLine()"
---
--- -- Optional: Make the background transparent to reduce distraction
--- vim.cmd([[hi StatusLine guibg=NONE]])  -- Transparent background
--- vim.cmd([[hi StatusLineNC guibg=NONE]]) -- Transparent background for inactive windows
