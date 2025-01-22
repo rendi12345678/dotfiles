@@ -27,7 +27,8 @@ return {
 
     -- Utility function to simplify setup
     local function setup_lsp(server, opts)
-      lsp[server].setup(coq.lsp_ensure_capabilities(opts or {}))
+      opts = opts or {}
+      lsp[server].setup(coq.lsp_ensure_capabilities(opts))
     end
 
     -- Keymap for diagnostics
