@@ -3,7 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
-    "windwp/nvim-ts-autotag",  -- Ensure this is installed for autotag functionality
+    "windwp/nvim-ts-autotag", -- Ensure this is installed for autotag functionality
   },
   config = function()
     -- import nvim-treesitter plugin
@@ -40,9 +40,31 @@ return {
       },
       -- ensure these language parsers are installed
       ensure_installed = {
-        "json", "javascript", "java", "typescript", "tsx", "asm", "yaml", "html", "css",
-        "prisma", "python", "markdown", "markdown_inline", "graphql", "php", "bash",
-        "lua", "vim", "dockerfile", "gitignore", "query", "vimdoc", "c", "rust",
+        "json",
+        "javascript",
+        "java",
+        "typescript",
+        "tsx",
+        "asm",
+        "yaml",
+        "html",
+        "css",
+        "prisma",
+        "python",
+        "markdown",
+        "markdown_inline",
+        "graphql",
+        "php",
+        "bash",
+        "lua",
+        "vim",
+        "dockerfile",
+        "gitignore",
+        "query",
+        "vimdoc",
+        "c",
+        "rust",
+        "smali",
       },
       -- incremental selection configuration
       incremental_selection = {
