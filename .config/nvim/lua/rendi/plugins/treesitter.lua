@@ -50,6 +50,7 @@ return {
         "html",
         "css",
         "prisma",
+        "hurl",
         "python",
         "markdown",
         "markdown_inline",
