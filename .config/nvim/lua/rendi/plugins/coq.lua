@@ -59,32 +59,32 @@ return {
     })
 
     -- Configure JDTLS (Java)
-    -- local workspace_dir = vim.fn.expand("~/workspace-root/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
-    -- setup_lsp("jdtls", {
-    --   cmd = {
-    --     "java",
-    --     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-    --     "-Dosgi.bundles.defaultStartLevel=4",
-    --     "-Declipse.product=org.eclipse.jdt.ls.core.product",
-    --     "-Dlog.protocol=true",
-    --     "-Dlog.level=ALL",
-    --     "-Xmx1G",
-    --     "--add-modules=ALL-SYSTEM",
-    --     "--add-opens",
-    --     "java.base/java.util=ALL-UNNAMED",
-    --     "--add-opens",
-    --     "java.base/java.lang=ALL-UNNAMED",
-    --     "-jar",
-    --     vim.fn.expand("~/.config/jdtls-latest/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"),
-    --     "-configuration",
-    --     vim.fn.expand("~/.config/jdtls-latest/config_linux"),
-    --     "-data",
-    --     workspace_dir,
-    --   },
-    --   root_dir = function(fname)
-    --     return lsp.util.root_pattern(".git", "pom.xml", "build.gradle")(fname) or vim.fn.getcwd()
-    --   end,
-    -- })
+    local workspace_dir = vim.fn.expand("~/workspace-root/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"))
+    setup_lsp("jdtls", {
+      cmd = {
+        "java",
+        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+        "-Dosgi.bundles.defaultStartLevel=4",
+        "-Declipse.product=org.eclipse.jdt.ls.core.product",
+        "-Dlog.protocol=true",
+        "-Dlog.level=ALL",
+        "-Xmx1G",
+        "--add-modules=ALL-SYSTEM",
+        "--add-opens",
+        "java.base/java.util=ALL-UNNAMED",
+        "--add-opens",
+        "java.base/java.lang=ALL-UNNAMED",
+        "-jar",
+        vim.fn.expand("~/.config/jdtls-latest/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"),
+        "-configuration",
+        vim.fn.expand("~/.config/jdtls-latest/config_linux"),
+        "-data",
+        workspace_dir,
+      },
+      root_dir = function(fname)
+        return lsp.util.root_pattern(".git", "pom.xml", "build.gradle")(fname) or vim.fn.getcwd()
+      end,
+    })
 
     -- Configure TypeScript LSP
     setup_lsp("ts_ls", {
@@ -115,6 +115,23 @@ return {
     -- Configure HTML
     setup_lsp("html", {
       root_dir = lsp.util.root_pattern(".git") or vim.fn.getcwd(),
+    })
+
+    -- Configure XML
+    setup_lsp("lemminx", {
+      -- The default configuration for lemminx should work for most users
+      settings = {
+        xml = {
+          -- Enabling or disabling validation
+          validate = {
+            enable = true, -- You can toggle this based on your needs
+          },
+        },
+      },
+      root_dir = function(fname)
+        -- This ensures the LSP is initialized for XML files
+        return lsp.util.root_pattern(".git", "pom.xml", "build.xml")(fname) or vim.fn.getcwd()
+      end,
     })
 
     -- Configure JSON

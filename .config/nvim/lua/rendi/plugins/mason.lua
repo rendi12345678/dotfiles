@@ -50,6 +50,7 @@ return {
         "black", -- python formatter
         "pylint",
         "asmfmt",
+        "xmlformatter",
         "google-java-format",
         "clang-format",
       },
