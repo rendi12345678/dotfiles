@@ -35,17 +35,6 @@ eval "$(zoxide init zsh)"
 # Load fzf
 source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
 
-
-# Load Powerlevel10k Theme
-source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-# Load zsh-autosuggestions
-source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Load zsh-syntax-highlighting
-source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Load zoxide
 # eval "$(~/.config/zsh/plugins/zoxide/install.sh)"
 
