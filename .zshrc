@@ -35,6 +35,7 @@ eval "$(zoxide init zsh)"
 # Load fzf
 source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
 
+
 # Load Powerlevel10k Theme
 source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
@@ -44,9 +45,6 @@ source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load zsh-syntax-highlighting
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Load fzf-tab
-source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Load zoxide
 # eval "$(~/.config/zsh/plugins/zoxide/install.sh)"
@@ -201,20 +199,11 @@ edit_and_execute_command() {
   fi
 }
 
-package_manager_auto_complete() {
-  # Get the list of available packages
-  local packages
-  packages=$(pacman -Ss | awk '{print $1}' | fzf --height=40% --border --preview="pacman -Si {1}" --preview-window=right:70%:wrap)
-
-  # Return the selected package
-  [[ -n "$packages" ]] && LBUFFER="$LBUFFER$packages"
-}
-
-# Bind Tab to trigger the fzf interface for pacman
-zle -N package_manager_auto_complete
-bindkey '^I' package_manager_auto_complete
-
 bindkey -s '^e' "edit_and_execute_command^M"
+
+# Load fzf-tab
+autoload -U compinit; compinit
+source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # ZSH History
 HISTFILE=$HOME/.zhistory
@@ -231,10 +220,6 @@ zle -N copy
 
 # Enable fzf
 source <(fzf --zsh)
-
-# Load fzf-tab
-autoload -U compinit; compinit
-source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Activate Powerlevel10k
 ZSH_THEME="powerlevel10k/powerlevel10k"
