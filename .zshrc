@@ -33,23 +33,23 @@ export PERL_MM_OPT="INSTALL_BASE=/home/rendi/perl5"
 eval "$(zoxide init zsh)"
 
 # Load fzf
-source ~/dotfiles/zsh/plugins/fzf/shell/key-bindings.zsh
+source ~/.config/zsh/plugins/fzf/shell/key-bindings.zsh
 
 # Load Powerlevel10k Theme
-source ~/dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # Load zsh-autosuggestions
-source ~/dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load zsh-syntax-highlighting
-source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Load fzf-tab
-source ~/dotfiles/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Load zoxide
-# eval "$(~/dotfiles/zsh/plugins/zoxide/install.sh)"
+# eval "$(~/.config/zsh/plugins/zoxide/install.sh)"
 
 # Aliases
 alias compile-esp32="arduino-cli compile --fqbn esp32:esp32:esp32"
@@ -234,15 +234,15 @@ source <(fzf --zsh)
 
 # Load fzf-tab
 autoload -U compinit; compinit
-source ~/dotfiles/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Activate Powerlevel10k
 ZSH_THEME="powerlevel10k/powerlevel10k"
-source ~/dotfiles/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.config/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # Syntax Highlighting and Autosuggestions
-source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export PATH="/home/rendi/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/rendi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
