@@ -5,6 +5,7 @@ fi
 
 # Environment Variables
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+export PATH="$HOME/.espressif/tools/xtensa-esp32-elf/bin:$PATH"
 export PYTHONPATH=/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/site-packages
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
@@ -51,6 +52,10 @@ source ~/dotfiles/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 # eval "$(~/dotfiles/zsh/plugins/zoxide/install.sh)"
 
 # Aliases
+alias compile-esp32="arduino-cli compile --fqbn esp32:esp32:esp32"
+alias upload-esp32="arduino-cli upload -p /dev/ttyUSB0 --fqbn esp32:esp32:esp32"
+alias monitor-esp32="arduino-cli monitor --port /dev/ttyUSB0"
+alias run-esp32="compile-esp32 . && upload-esp32 . && monitor-esp32 . --config 115200"
 alias printd='printf "%d\n"'
 alias sudoedit='function _sudoedit(){ sudo -e "$1"; };_sudoedit'
 alias ls="eza --icons=always"

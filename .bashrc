@@ -16,3 +16,5 @@ export PYTHONPATH=/home/rendi/Downloads/pwndbg-2024.08.29/.venv/lib/python3.13/s
 export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
 export ANDROID_HOME=/opt/android-sdk
 export NDK_HOME=/opt/android-ndk
+export PATH="$HOME/.espressif/tools/xtensa-esp32-elf/bin:$PATH"
+
