@@ -49,6 +49,8 @@ bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id qutebrowser
 bindsym $mod+e exec --no-startup-id alacritty -e ranger
 bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+w exec --no-startup-id feh ~/Charts/hiragana-chart@2x-8-800x1035.png
+bindsym $mod+Shift+w exec --no-startup-id feh ~/Charts/katakana-chart-preview-lg-1200x1553-1776256199.png
 
 # Window focus navigation
 bindsym $mod+h focus left
@@ -87,8 +89,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Gaps configuration
-gaps inner 0
-gaps outer 0
+gaps inner 20
+gaps outer 20
 
 # Workspace definitions
 set $ws1 "1"
