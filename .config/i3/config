@@ -31,12 +31,14 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Background wallpaper
-exec_always --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-banff-national-park-valley-of-the-ten-peaks-6000x3376-4828.jpg
-bindsym ctrl+1 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913.jpg
-bindsym ctrl+2 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-canada-reflection-landscape-snow-covered-5120x3200-3933.jpg
+exec_always --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-4k-hd-wallpaper-river-mountains-rocks-5706.jpg
+bindsym ctrl+1 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-4k-hd-wallpaper-river-mountains-rocks-5706.jpg
+bindsym ctrl+2 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913.jpg
 bindsym ctrl+3 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-4k-5k-wallpaper-alps-mountains-stars-night-5713.jpg
 bindsym ctrl+4 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-5k-4k-wallpaper-8k-hd-mountains-sunset-hills-5303.jpg
-bindsym ctrl+5 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-4k-hd-wallpaper-river-mountains-rocks-5706.jpg
+bindsym ctrl+5 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-banff-national-park-valley-of-the-ten-peaks-6000x3376-4828.jpg
+bindsym ctrl+6 exec --no-startup-id feh --bg-scale ./.config/i3/images/moraine-lake-canada-reflection-landscape-snow-covered-5120x3200-3933.jpg
+
 
 # Lock screen and power management
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
