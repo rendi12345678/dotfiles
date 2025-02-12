@@ -56,8 +56,9 @@ bindsym $mod+q kill
 bindsym $mod+b exec --no-startup-id qutebrowser
 bindsym $mod+e exec --no-startup-id alacritty -e ranger
 bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+w exec --no-startup-id feh ~/Charts/hiragana-chart@2x-8-800x1035.png
-bindsym $mod+Shift+w exec --no-startup-id feh ~/Charts/katakana-chart-preview-lg-1200x1553-1776256199.png
+bindsym $mod+w exec --no-startup-id feh ~/.config/i3/charts/hiragana-chart@2x-8-800x1035.png
+bindsym $mod+Shift+w exec --no-startup-id feh ~/.config/i3/charts/katakana-chart-preview-lg-1200x1553-1776256199.png
+bindsym $mod+g exec --no-startup-id feh ~/.config/i3/charts/germany.jpg
 
 # Window focus navigation
 bindsym $mod+h focus left
