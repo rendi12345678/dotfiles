@@ -31,7 +31,7 @@ exec --no-startup-id xinput set-prop "ASUE1301:00 04F3:3128 Touchpad" "libinput 
 bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
 
 # Background wallpaper
-exec_always --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913
+exec_always --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913.jpg
 bindsym ctrl+1 exec --no-startup-id feh --bg-scale ./.config/i3/images/lake-louise-winter-5120x2880-19913.jpg
 bindsym ctrl+2 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-4k-hd-wallpaper-river-mountains-rocks-5706.jpg
 bindsym ctrl+3 exec --no-startup-id feh --bg-scale ./.config/i3/images/switzerland-3840x2160-4k-5k-wallpaper-alps-mountains-stars-night-5713.jpg
